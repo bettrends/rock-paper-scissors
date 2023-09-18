@@ -2,7 +2,7 @@
 getPlayerChoice functions in the playRound function so in the 
 future, the variables can be changed without refreshing the page*/
 
-let playerSelection;
+let playerSelection = ' ';
 let computerSelection;
 
 function random() {
@@ -20,57 +20,59 @@ function getComputerChoice() {
         return "scissors"
     }
 }
+//Function used to get user choice when playing in console log
 
-
-//let computerSelection = getComputerChoice();
-
-function getPlayerChoice() {
+/*function getPlayerChoice() {
     let userSelection = " ";
     while ((userSelection != "rock") && (userSelection != "paper") && (userSelection != "scissors")) {
         let userChoice = prompt("Pick rock, paper, or scissors:");
         userSelection = userChoice.toLowerCase();
     }
     return userSelection;
-}
-
-//let playerSelection = getPlayerChoice();
+}*/
 
 function playRound() {
-    playerSelection = getPlayerChoice();
+    //playerSelection = getPlayerChoice();
     computerSelection = getComputerChoice();
-
-    console.log("You chose: " + playerSelection);
-    console.log("Computer chose: " + computerSelection);
+    let result;
+    let message;
 
     if (playerSelection === computerSelection) {
-        console.log("Tie");
+        result = "tie";
+        alert("You chose: ".concat(playerSelection, "\nComputer chose: ", computerSelection, "\nYou ", result));
         return "tie";
     } else {
         switch (playerSelection) {
             case "rock":
                 if (computerSelection == "paper") {
-                    console.log("You lose :(");
+                    result = "lose";
+                    alert("You chose: ".concat(playerSelection, "\nComputer chose: ", computerSelection, "\nYou ", result));
                     return "lose";
                 } else if (computerSelection == "scissors") {
-                    console.log("You WIN :)");
+                    result = "win";
+                    alert("You chose: ".concat(playerSelection, "\nComputer chose: ", computerSelection, "\nYou ", result));
                     return "win";
                 }
                 break;
             case "scissors":
                 if (computerSelection == "rock") {
-                    console.log("You lose :(");
+                    result = "lose";
+                    alert("You chose: ".concat(playerSelection, "\nComputer chose: ", computerSelection, "\nYou ", result));
                     return "lose";
                 } else if (computerSelection == "paper") {
-                    console.log("You WIN :)");
+                    result = "win";
+                    alert("You chose: ".concat(playerSelection, "\nComputer chose: ", computerSelection, "\nYou ", result));
                     return "win";
                 }
                 break;
             case "paper":
                 if (computerSelection == "scissors") {
-                    console.log("You lose :(");
+                    result = "lose";
+                    alert("You chose: ".concat(playerSelection, "\nComputer chose: ", computerSelection, "\nYou ", result));
                     return "lose";
                 } else if (computerSelection == "rock") {
-                    console.log("You WIN :)");
+                    result = "win";
+                    alert("You chose: ".concat(playerSelection, "\nComputer chose: ", computerSelection, "\nYou ", result));
                     return "win";
                 }
                 break;
@@ -79,7 +81,20 @@ function playRound() {
     }
 }
 
-function game() {
+const buttons = document.querySelectorAll('.btn');
+
+for (let i = 0; i < buttons.length; i++) {
+    let playerChoice = buttons[i].addEventListener('click', function(){
+        playerSelection = (this.innerText).toLowerCase();
+        playRound();
+    });
+}
+
+//alert(playerSelection);
+
+
+
+/*function game() {
     let round;
     let winCount = 0;
     let loseCount = 0;
@@ -113,4 +128,5 @@ function game() {
         console.log("TIE GAME");
     }
 
-}
+}*/
+
